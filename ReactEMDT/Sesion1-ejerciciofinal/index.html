@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Lista de Recetas</title>
+</head>
+
+<body>
+  <div id="raiz"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <script>
+    const root = ReactDOM.createRoot(document.getElementById('raiz'));
+
+    const todoList = [];
+
+    const submit = (event) => {
+      event.preventDefault();
+      todoList.push(
+        React.createElement('li', { key: event.target.receta.value }, "RECETA: " + event.target.receta.value),
+        React.createElement('li', { key: event.target.ingredientes.value }, "INGREDIENTES: " + event.target.ingredientes.value),
+        React.createElement('li', { key: event.target.preparacion.value }, "TIEMPO DE PREPARACIÓN: " + event.target.preparacion.value),
+        React.createElement('h1', null, "" )
+
+      );
+
+      const ul = React.createElement('ul', null, todoList);
+
+      event.target.receta.value = '';
+      event.target.receta.focus();
+      event.target.ingredientes.value = '';
+      event.target.preparacion.value = '';
+
+      root.render([form, ul]);
+    };
+
+    const form = React.createElement('form', { onSubmit: submit }, [
+      React.createElement('label', { htmlFor: 'receta' }, 'Receta: '),
+      React.createElement('input', { type: 'text', name: 'receta' }),
+      React.createElement('br','br'),
+      React.createElement('label', { htmlFor: 'ingredientes' }, 'Ingredientes: '),
+      React.createElement('input', { type: 'text', name: 'ingredientes' }),
+      React.createElement('br'),
+      React.createElement('label', { htmlFor: 'preparacion' }, 'Tiempoe de preparación: '),
+      React.createElement('input', { type: 'text', name: 'preparacion' }),
+      React.createElement('br'),
+      React.createElement('button', { type: 'submit' }, 'Agregar')  
+  
+    ]);
+
+    root.render(form);
+  </script>
+</body>
+
+</html>
